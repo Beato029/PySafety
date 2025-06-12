@@ -7,7 +7,7 @@ import colorama
 from colorama import Fore
 import requests
 
-VERSIONE = ['beta', 2]
+VERSIONE = ['beta', 1]
 
 colorama.init(autoreset=True)
 
