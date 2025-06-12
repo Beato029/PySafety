@@ -177,14 +177,7 @@ def check_update():
     if update:
         download = input('Scaricare l`aggiornamento [Y/n]? ').lower()
         if download in ['yes', 'y']:
-            os.system('sudo git clone https://github.com/Beato029/PySafety.git')
-            os.system('sudo mv Pysafety/main.py .')
-            os.system('sudo touch start.py')
-            command = 'import os\nos.system("sudo python main.py")'
-            os.system(f'echo "{command}" > start.py')
-            os.system('sudo rm -rf PySafety')
-            os.system('sudo python start.py')
-            os.system('sudo rm -rf start.py')
+            os.system('sudo python update.py')
         else:
             pass
 
