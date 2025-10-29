@@ -1,3 +1,4 @@
 {
-  "latest_version": "beta 1"
+  "type_version": "beta", // Or public
+  "latest_version": "1"
 }
