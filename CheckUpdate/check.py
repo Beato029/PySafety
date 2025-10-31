@@ -24,33 +24,34 @@ def readData():
 def checkForUpdate():
     TYPE = "beta"
     VERSION = "1"
+ 
+    req = requests.get("https://raw.githubusercontent.com/Beato029/PySafety/refs/heads/main/version.json")
+    data = req.json()
 
-    while True:
-        req = requests.get("https://raw.githubusercontent.com/Beato029/PySafety/refs/heads/main/version.json")
-        data = req.json()
-
-        type_version = data.get("type_version")
-        latest_version = data.get("latest_version")
+    type_version = data.get("type_version")
+    latest_version = data.get("latest_version")
 
 
-        # Da beta a beta
-        if type_version == "beta" and TYPE == "beta" and latest_version > VERSION: 
-            print(f"Beta {str(latest_version)} Disponibile (NON si consiglia l'installazione delle versioni beta, perchè potrebbero contenere bug)")
+    # Da beta a beta
+    if type_version == "beta" and TYPE == "beta" and latest_version > VERSION: 
+        print(f"Beta {str(latest_version)} Disponibile (NON si consiglia l'installazione delle versioni beta, perchè potrebbero contenere bug)")
+        print("Scaricala da qui: https://github.com/Beato029/PySafety")
 
-        # da beta a pubblica
-        elif type_version == "public" and TYPE == "beta":
-            print(f"Versione {str(latest_version)} Disponibile (si consiglia di aggiornare dalla versione di Beta per correggere eventuali bug)")
+    # da beta a pubblica
+    elif type_version == "public" and TYPE == "beta":
+        print(f"Versione {str(latest_version)} Disponibile (si consiglia di aggiornare dalla versione di Beta per correggere eventuali bug)")
+        print("Scaricala da qui: https://github.com/Beato029/PySafety")
 
-        # da pubblica a pubblica
-        elif type_version == "public" and TYPE == "public" and latest_version > VERSION:
-            print(f"Versione {str(latest_version)} Disponibile (Si consiglia di aggiornare per correggere eventuali bug)")
+    # da pubblica a pubblica
+    elif type_version == "public" and TYPE == "public" and latest_version > VERSION:
+        print(f"Versione {str(latest_version)} Disponibile (Si consiglia di aggiornare per correggere eventuali bug)")
+        print("Scaricala da qui: https://github.com/Beato029/PySafety")
 
-        # da pubblica a beta
-        elif type_version == "beta" and TYPE == "public":
-            print(f"Beta {str(latest_version)} Disponibile (NON si consiglia di passare da una versione pubblica a una Beta, perchè l'aggiornamento potrebbe causare bug)")
+    # da pubblica a beta
+    elif type_version == "beta" and TYPE == "public":
+        print(f"Beta {str(latest_version)} Disponibile (NON si consiglia di passare da una versione pubblica a una Beta, perchè l'aggiornamento potrebbe causare bug)")
+        print("Scaricala da qui: https://github.com/Beato029/PySafety")
 
-        else:
-            print("Nessun aggiornamento disponibile")
-            break
-
-checkForUpdate()
+    else:
+        print("Nessun aggiornamento disponibile")       
+        print("Scaricala da qui: https://github.com/Beato029/PySafety")

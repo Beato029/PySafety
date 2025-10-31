@@ -1,0 +1,26 @@
+# (1) Inizializza il repository locale (solo se non l’hai ancora fatto)
+git init
+
+# (2) Imposta il branch principale come "main"
+git branch -M main
+
+# (3) Aggiungi tutti i file del progetto
+git add .
+
+# (4) Crea un commit con un messaggio descrittivo
+git commit -m "Primo commit - aggiunti tutti i file del progetto"
+
+# (5) Collega il repository locale a quello remoto su GitHub
+# (sostituisci il link con quello del tuo repo!)
+git remote add origin https://github.com/Beato029/PySafety.git
+
+# (6) Scarica eventuali file già presenti su GitHub (come README o .gitignore)
+git pull origin main --allow-unrelated-histories
+
+# (7) Unisci eventuali conflitti, se ce ne sono (VS Code ti mostrerà i file)
+# Poi conferma le modifiche:
+git add .
+git commit -m "Risolti conflitti di merge"
+
+# (8) Invia tutto su GitHub 🎉
+git push -u origin main
