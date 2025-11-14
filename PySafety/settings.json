@@ -1,5 +1,0 @@
-{
-    "host_default": "127.0.0.1",
-    "port_default": "8080",
-    "check_update": true
-}
