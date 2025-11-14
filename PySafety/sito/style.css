@@ -1,0 +1,32 @@
+body {
+    background-color: white;
+}
+
+h1 {
+    color: red;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+#title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-size: 50px;
+        color: #08CB00;
+        font-family: "Mono Trust Display", sans-serif;
+        font-weight: bold;
+        padding: 0;
+}
+
+#audioSpectre {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    font-size: 15px;
+    margin-top: 200px;
+}
