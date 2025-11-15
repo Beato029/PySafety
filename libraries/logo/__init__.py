@@ -1,1 +1,0 @@
-from logo.logo import Logo
