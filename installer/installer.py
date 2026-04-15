@@ -108,6 +108,7 @@ class MainWindow(QWidget):
         horizontal_layout = QHBoxLayout()
 
         yes_button = QPushButton("Installa")
+        yes_button.clicked.connect(self.install)
 
         no_button = QPushButton("Annulla")
         no_button.clicked.connect(self.close)
@@ -115,9 +116,6 @@ class MainWindow(QWidget):
         horizontal_layout.addWidget(no_button)
         horizontal_layout.addWidget(yes_button)
 
-        # self.main_layout.addWidget(label1, alignment=Qt.AlignmentFlag.AlignCenter)
-        # self.main_layout.addWidget(label2, alignment=Qt.AlignmentFlag.AlignCenter)
-        # self.main_layout.addWidget(label3, alignment=Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(frame)
         self.main_layout.addLayout(horizontal_layout)
 
@@ -125,8 +123,8 @@ class MainWindow(QWidget):
         import requests
         import time
 
-        url = "https://raw.githubusercontent.com/Beato029/PySafety/main/pysafety/pysafety.py"
-        output_file = "pysafety.py"
+        url = "https://raw.githubusercontent.com/Beato029/PySafety/main/pysafety/main.py"
+        output_file = "main.py"
 
         response = requests.get(url, stream=True)
 
