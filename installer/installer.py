@@ -53,20 +53,14 @@ class MainWindow(QWidget):
         """)
 
         self.main_layout.addStretch()
-        # self.main_layout.addWidget(self.progress_bar)
         self.main_layout.addWidget(self.label)
         self.main_layout.addStretch()
 
         self.setLayout(self.main_layout)
 
-
-        # self.timer = QTimer()
-        # self.timer.timeout.connect(self.update_progress)
-
-        # self.value  = 0
+        self.value  = 0
         
         self.askYesUpdate()
-        # self.start_loading()
 
     def clear_window(self):
         while self.main_layout.count():
@@ -78,6 +72,8 @@ class MainWindow(QWidget):
                     child = item.layout().takeAt(0)
                     if child.widget():
                         child.widget().deleteLater()
+
+        return True
 
 
     def askYesUpdate(self):
@@ -120,55 +116,70 @@ class MainWindow(QWidget):
         self.main_layout.addLayout(horizontal_layout)
 
     def install(self):
-        import requests
-        import time
+        if self.clear_window():            
 
-        url = "https://raw.githubusercontent.com/Beato029/PySafety/main/pysafety/main.py"
-        output_file = "main.py"
+            self.label = QLabel("Downloading...")
+            
+            self.main_layout.addStretch()
+            # self.main_layout.addWidget(self.progress_bar)
+            self.main_layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignCenter)
+            self.main_layout.addStretch()
 
-        response = requests.get(url, stream=True)
+            self.timer = QTimer()
+            self.timer.timeout.connect(self.update_progress)
+            self.start_loading()
 
-        if response.status_code != 200:
-            from tkinter import messagebox
-            messagebox.showerror("Errore", f"Errore: {response.status_code}")
-            exit()
+            import requests
+            import time
 
-        total_size = int(response.headers.get("content-length", 0))
-        downloaded = 0
-        chunk_size = 1024
+            main_url = "https://raw.githubusercontent.com/Beato029/PySafety/main/pysafety/main.py"
+            output_main = "main.py"
 
-        start_time = time.time()
+            response = requests.get(main_url, stream=True)
 
-        with open(output_file, "wb") as f:
-            for chunk in response.iter_content(chunk_size=chunk_size):
-                if chunk:
-                    f.write(chunk)
-                    downloaded += len(chunk)
+            if response.status_code != 200:
+                print("Errore:", response.status_code)
+                exit()
 
-                    elapsed = time.time() - start_time
-                    speed = downloaded / elapsed if elapsed > 0 else 0
+            total_size = int(response.headers.get("content-length", 0))
+            downloaded = 0
+            chunk_size = 1024
 
-                    eta = (total_size - downloaded) / speed if speed > 0 else 0
-                    percent = (downloaded / total_size) * 100 if total_size else 0
+            start_time = time.time()
 
-                    sys.stdout.write(
-                        f"\r[{percent:.2f}%] "
-                        f"{downloaded/1024:.1f}KB / {total_size/1024:.1f}KB | "
-                        f"{speed/1024:.1f} KB/s | "
-                        f"ETA: {eta:.1f}s"
-                    )
-                    sys.stdout.flush()
+            with open(output_main, "wb") as f:
+                for chunk in response.iter_content(chunk_size=chunk_size):
+                    if chunk:
+                        f.write(chunk)
+                        downloaded += len(chunk)
+
+                        elapsed = time.time() - start_time
+                        speed = downloaded / elapsed if elapsed > 0 else 0
+
+                        eta = (total_size - downloaded) / speed if speed > 0 else 0
+                        percent = (downloaded / total_size) * 100 if total_size else 0
+
+                        sys.stdout.write(
+                            f"\r[{percent:.2f}%] "
+                            f"{downloaded/1024:.1f}KB / {total_size/1024:.1f}KB | "
+                            f"{speed/1024:.1f} KB/s | "
+                            f"ETA: {eta:.1f}s"
+                        )
+                        sys.stdout.flush()
+
+            print("\nDownload completato!")
+            self.label.setText("Download completato\npuoi chiudere questa pagina")
 
     def start_loading(self):
         self.value = 0
         self.progress_bar.setValue(self.value)
-        self.label.setText("Caricamento in corso...")
+        # self.label.setText("Caricamento in corso...")
         self.timer.start(20)
 
     def update_progress(self):
         if self.value >= 100:
             self.timer.stop()
-            self.label.setText("Caricamento completato ✔")
+            # self.label.setText("Caricamento completato ✔")
             return
 
         # smooth increment
