@@ -2,7 +2,7 @@ import requests
 import time
 import sys
 
-url = "https://raw.githubusercontent.com/Beato029/PySafezty/main/main.py"
+url = "https://raw.githubusercontent.com/Beato029/PySafety/main/main.py"
 output_file = "main.py"
 
 response = requests.get(url, stream=True)
